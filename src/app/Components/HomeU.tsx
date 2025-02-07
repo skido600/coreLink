@@ -26,10 +26,14 @@ function HomeU() {
             <div className="mt-2  flex flex-col  gap-8">
               <Link href="/login">
                 <p className=" px-3  rounded-full py-2 text-[13px] border border-teal-300 text-white text-center font-inter">
-                  Sign Up As a Admin
+                  Sign Up as an Admin
                 </p>
               </Link>
-
+              <Link href="/login">
+                <p className=" px-3  rounded-full py-2 text-[13px] border border-teal-300 text-white text-center font-inter">
+                  Login as an Admin
+                </p>
+              </Link>
               {/* <p className="border border-teal-300 px-3 rounded-full py-2 text-[13px] text-white text-center font-inter">
                 Sign Up As a Client
               </p> */}
