@@ -8,9 +8,9 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+      fontFamily: {
+        inter: ["Inter", "serif"],
+        Ibm: ["IBM Plex Sans", "serif"],
       },
     },
   },
