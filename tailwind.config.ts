@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        inter: ["Inter", "serif"],
+        inter: ["Jost", "serif"],
         Ibm: ["IBM Plex Sans", "serif"],
       },
     },

@@ -50,6 +50,7 @@ function Signup() {
               </div>
               <div>
                 <input
+                  required
                   type="password"
                   placeholder="password"
                   className="border border-teal-300 w-full text-white px-4 py-2 rounded-full bg-transparent outline-none font-inter placeholder:text-white"
