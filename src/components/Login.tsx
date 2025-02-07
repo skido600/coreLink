@@ -1,7 +1,15 @@
+"use client";
 import Link from "next/link";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 import React from "react";
-// import { FaRegEyeSlash } from "react-icons/fa";
+import { useState } from "react";
+
 function Login() {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
   return (
     <>
       {" "}
@@ -37,15 +45,21 @@ function Login() {
                   required
                   type="email"
                   placeholder="Email"
-                  className="border border-teal-300 w-full text-white px-4 py-2 rounded-full bg-transparent outline-none font-inter placeholder:text-white"
+                  className="border border-[#CBCBCB] w-full text-white px-4 py-2 rounded-full bg-transparent outline-none font-inter placeholder:text-white"
                 />
               </div>
-              <div>
+              <div className="relative">
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   placeholder="password"
-                  className="border border-teal-300 w-full text-white px-4 py-2 rounded-full bg-transparent outline-none font-inter placeholder:text-white"
+                  className="border border-[#CBCBCB] w-full text-white px-4 py-2 rounded-full focus:bg-transparent bg-transparent outline-none font-inter placeholder:text-white"
                 />
+                <div
+                  className="absolute top-3 right-2 text-[#CBCBCB]"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? <FaEye /> : <FaEyeSlash />}
+                </div>
               </div>
               <div>
                 <div className="p-2 text-center bg-[#01162A]  text-white font-inter  rounded-full ">

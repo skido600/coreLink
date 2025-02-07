@@ -36,7 +36,7 @@ function HomeU() {
               </Link>
             </div>
           </article>
-          <div className="mt-6">
+          {/* <div className="mt-6">
             <p className="font-Ibm text-white">
               Already have an account ?
               <Link href="/login">
@@ -45,7 +45,7 @@ function HomeU() {
                 </span>{" "}
               </Link>
             </p>
-          </div>
+          </div> */}
         </section>
 
         <article className="relative  mt-5">

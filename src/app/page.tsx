@@ -1,4 +1,4 @@
-import HomeU from "./Components/HomeU";
+import HomeU from "../components/HomeU";
 
 export default function page() {
   return (
