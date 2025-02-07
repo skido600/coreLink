@@ -34,9 +34,6 @@ function HomeU() {
                   Login as an Admin
                 </p>
               </Link>
-              {/* <p className="border border-teal-300 px-3 rounded-full py-2 text-[13px] text-white text-center font-inter">
-                Sign Up As a Client
-              </p> */}
             </div>
           </article>
           <div className="mt-6">

@@ -1,6 +1,6 @@
-import React from "react";
+import Image from "next/image";
 
-function Login() {
+function Signup() {
   return (
     <>
       {" "}
@@ -17,9 +17,27 @@ function Login() {
               <p className="bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
                 Create an Account
               </p>
+              <div className="mt-2">
+                <p className="font-Ibm text-white">
+                  Already have an account ?
+                  <span className="bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
+                    {" "}
+                    Log In
+                  </span>
+                </p>
+              </div>
             </div>
 
+            {/* <div className="mt-2"></div> */}
             <div className="mt-2  flex flex-col  gap-8">
+              <div>
+                <input
+                  required
+                  type="text"
+                  placeholder="Full Name"
+                  className="border border-teal-300 w-full text-white px-4 py-2 rounded-full bg-transparent outline-none font-inter placeholder:text-white"
+                />
+              </div>
               <div>
                 <input
                   required
@@ -37,29 +55,34 @@ function Login() {
               </div>
               <div>
                 <div className="px-2 flex items-center text-white font-inter border border-teal-300 rounded-full py-1  gap-2 justify-center">
-                  Login
+                  Sign up
                 </div>
               </div>
             </div>
           </article>
-          <div className="mt-6">
-            <p className="font-Ibm text-white text-[15px]">
-              Didn&apos;t have an account?{" "}
-              <span className="bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
-                Signup
-              </span>
-            </p>
-          </div>
 
-          <menu className="mt-8 flex gap-2">
-            <input type="checkbox" />
-            <label className="font-Ibm text-white text-[12px]">
-              I agree to the Terms of Service and Privacy Policy
-            </label>
-          </menu>
+          <aside className="flex items-center mt-4">
+            <hr className="flex-grow  border-teal-300" />
+            <span className="bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent px-2">
+              or register with
+            </span>
+            <hr className="flex-grow  border-teal-300" />
+          </aside>
+
+          <main>
+            <div className="px-2 flex items-center text-white font-inter border border-teal-300 rounded-full py-1 mt-8 gap-2 justify-center">
+              <Image
+                src="/svg/Google Icon.svg"
+                alt="google auth"
+                width={30}
+                height={30}
+              />
+              Google
+            </div>
+          </main>
         </section>
 
-        <article className="relative mt-12">
+        <article className="relative mt-5">
           <p className="md:absolute bottom-0 px-4 text-[13px] text-white font-inter">
             &quot;CoreLink is a collaboration and productivity platform that
             empowers teams to work smarter, not harder. Whether you’re managing
@@ -73,4 +96,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signup;

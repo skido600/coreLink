@@ -21,3 +21,8 @@
       #989898;
   background-blend-mode: multiply, multiply;
 }
+input[type="checkbox"],
+input[type="radio"] {
+  padding: 20px;
+  accent-color: #4dc7b5; /* Green color */
+}
