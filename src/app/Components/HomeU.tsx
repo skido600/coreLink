@@ -4,7 +4,7 @@ function HomeU() {
   return (
     <>
       <main className="bg-[#181a1f] min-h-screen md:px-4 py-5 grid md:grid-cols-2 relative ">
-        <section className="bg-[#03346E] py-2 px-4  md:py-4 relative rounded-lg">
+        <section className="bg-[#03346E] py-2 px-4 mx-4  md:py-4 relative rounded-lg">
           <h1 className="text-3xl text-white font-inter font-bold">
             Core
             <span className="bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
@@ -12,7 +12,7 @@ function HomeU() {
             </span>
           </h1>
           <article className=" flex flex-col justify-center  gap-y-8 mt-12">
-            <p className="bg-gradient-to-r text-[2rem] font-inter from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
+            <p className="bg-gradient-to-r text-[2rem]  font-inter from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
               Welcome to CoreLink
             </p>
 
