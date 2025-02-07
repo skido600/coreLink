@@ -4,7 +4,7 @@ function HomeU() {
   return (
     <>
       <main className="bg-[#181a1f] min-h-screen md:px-4 py-5 grid md:grid-cols-2 relative ">
-        <section className="bg-teal-950 py-2 px-4  md:py-4 relative rounded-lg">
+        <section className="bg-[#03346E] py-2 px-4  md:py-4 relative rounded-lg">
           <h1 className="text-3xl text-white font-inter font-bold">
             Core
             <span className="bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
@@ -12,7 +12,7 @@ function HomeU() {
             </span>
           </h1>
           <article className=" flex flex-col justify-center  gap-y-8 mt-12">
-            <p className="bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
+            <p className="bg-gradient-to-r text-[2rem] font-inter from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
               Welcome to CoreLink
             </p>
 
@@ -24,13 +24,13 @@ function HomeU() {
               </p>
             </div>
             <div className="mt-2  flex flex-col  gap-8">
-              <Link href="/login">
-                <p className=" px-3  rounded-full py-2 text-[13px] border border-teal-300 text-white text-center font-inter">
+              <Link href="/signup">
+                <p className=" px-3  rounded-full py-2 text-[13px] bg-[#01162A]  text-white text-center font-inter">
                   Sign Up as an Admin
                 </p>
               </Link>
               <Link href="/login">
-                <p className=" px-3  rounded-full py-2 text-[13px] border border-teal-300 text-white text-center font-inter">
+                <p className=" px-3  bg-[#01162A]  rounded-full py-2 text-[13px]  text-white text-center font-inter">
                   Login as an Admin
                 </p>
               </Link>
@@ -39,10 +39,11 @@ function HomeU() {
           <div className="mt-6">
             <p className="font-Ibm text-white">
               Already have an account ?
-              <span className="bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
-                {" "}
-                Log In
-              </span>
+              <Link href="/login">
+                <span className="bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
+                  Log In
+                </span>{" "}
+              </Link>
             </p>
           </div>
         </section>
