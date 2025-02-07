@@ -1,11 +1,10 @@
-import ProtectedRoute from "@/components/ProtectedRoute";
+// import Sidebar from "@/components/Sidebar";
+// import ProtectedRoute from "@/components/ProtectedRoute";
 
 export default function admin() {
   return (
-    <ProtectedRoute>
-      <>
-        <h1>Welcome admin</h1>
-      </>
-    </ProtectedRoute>
+    <main>
+      <h1>hello</h1>
+    </main>
   );
 }
