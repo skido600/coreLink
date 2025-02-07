@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 function HomeU() {
   return (
     <>
@@ -22,12 +24,15 @@ function HomeU() {
               </p>
             </div>
             <div className="mt-2  flex flex-col  gap-8">
-              <p className=" px-3  rounded-full py-2 text-[13px] border border-teal-300 text-white text-center font-inter">
-                Sign Up As a Admin
-              </p>
-              <p className="border border-teal-300 px-3 rounded-full py-2 text-[13px] text-white text-center font-inter">
+              <Link href="/login">
+                <p className=" px-3  rounded-full py-2 text-[13px] border border-teal-300 text-white text-center font-inter">
+                  Sign Up As a Admin
+                </p>
+              </Link>
+
+              {/* <p className="border border-teal-300 px-3 rounded-full py-2 text-[13px] text-white text-center font-inter">
                 Sign Up As a Client
-              </p>
+              </p> */}
             </div>
           </article>
           <div className="mt-6">
