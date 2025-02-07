@@ -50,7 +50,6 @@ function Login() {
           <div className="mt-2 flex flex-col gap-8">
             <div>
               <input
-                required
                 type="email"
                 name="email"
                 value={details.email}

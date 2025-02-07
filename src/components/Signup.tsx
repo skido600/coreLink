@@ -1,6 +1,6 @@
 "use client";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-
+import Image from "next/image";
 import Link from "next/link";
 
 import Loader from "../app/helper/Loader";
@@ -100,6 +100,32 @@ function Signup() {
             I agree to the Terms of Service and Privacy Policy
           </label>
         </menu>
+        <div className="mt-2 flex items-center px-2 bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
+          <hr className="border-[#ec9393] flex-grow" /> or Register with{" "}
+          <hr className="border-[#CBCBCB] flex-grow" />
+        </div>
+        <div className="mt-2">
+          <p className="font-inter flex items-center gap-3 border border-[#CBCBCB] rounded-full justify-center py-3 text-white">
+            <Image
+              src="/svg/Facebook Icon.svg"
+              alt="Description"
+              width={20}
+              height={20}
+            />
+            Facebook
+          </p>
+        </div>
+        <div className="mt-2">
+          <p className="font-inter flex items-center gap-3 border border-[#CBCBCB] rounded-full justify-center py-3 text-white">
+            <Image
+              src="/svg/Google Icon.svg"
+              alt="Description"
+              width={20}
+              height={20}
+            />
+            Google
+          </p>
+        </div>
       </section>
       <article className="relative mt-12">
         <p className="md:absolute bottom-0 px-4 text-[13px] text-white font-inter">

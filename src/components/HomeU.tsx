@@ -3,7 +3,7 @@ import Link from "next/link";
 function HomeU() {
   return (
     <>
-      <main className="bg-[#181a1f] min-h-screen md:px-4 py-5 grid md:grid-cols-2 relative ">
+      <main className="bg-[#181a1f] min-h-screen md:px-20 py-5 grid  lg:grid-cols-2 relative ">
         <section className="bg-[#03346E] py-2 px-4 mx-4  md:py-4 relative rounded-lg">
           <h1 className="text-3xl text-white font-inter font-bold">
             Core
@@ -18,22 +18,25 @@ function HomeU() {
 
             <div className="mt-2">
               <p className="text-white font-inter text-[13px]">
-                CoreLink connects admins, workers, and clients for seamless
-                collaboration, real-time updates, and secure communication—all
-                in one place
+                CoreLink is a centralized platform designed to streamline
+                collaboration between admins, workers, and clients. It provides
+                real-time updates, secure communication, and a shared workspace
+                for managing tasks, products, and projects. Whether you &quot;
+                re managing a small team or a large organization, CoreLink
+                ensures everyone stays connected and informed.
               </p>
             </div>
             <div className="mt-2  flex flex-col  gap-8">
               <Link href="/signup">
                 <p className=" px-3  rounded-full py-2 text-[13px] bg-[#01162A]  text-white text-center font-inter">
-                  Sign Up as an Admin
+                  Sign Up
                 </p>
               </Link>
-              <Link href="/login">
+              {/* <Link href="/login">
                 <p className=" px-3  bg-[#01162A]  rounded-full py-2 text-[13px]  text-white text-center font-inter">
                   Login as an Admin
                 </p>
-              </Link>
+              </Link> */}
             </div>
           </article>
           {/* <div className="mt-6">
