@@ -1,7 +1,60 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-
+import { useState } from "react";
+interface datas {
+  name: string;
+  email: string;
+  password: string;
+}
 function Signup() {
+  const [details, setDetails] = useState<datas>({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState<string>("");
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setDetails((prev) => ({ ...prev, [name]: value }));
+  };
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+  const validateForm = () => {
+    const { name, email, password } = details;
+
+    if (!name || !email || !password) {
+      setError("All fields are required.");
+      return false;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      setError("Please enter a valid email address.");
+      return false;
+    }
+
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters long.");
+      return false;
+    }
+    if (!passwordRegex.test(password)) {
+      setError(
+        "Password must be at least 8 characters long and include uppercase, lowercase, number, and special character."
+      );
+      return false;
+    }
+    setError("");
+    return true;
+  };
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (validateForm()) {
+      console.log("Form submitted:", details);
+    }
+  };
+  console.log(error);
   return (
     <>
       {" "}
@@ -29,21 +82,31 @@ function Signup() {
                 </Link>
               </div>
             </div>
-
+            {error && (
+              <p className="text-red-500 text-sm font-inter text-center">
+                {error}
+              </p>
+            )}
             {/* <div className="mt-2"></div> */}
             <div className="mt-2  flex flex-col  gap-8">
               <div>
                 <input
+                  name="name"
                   required
                   type="text"
                   placeholder="Full Name"
+                  value={details.name}
+                  onChange={handleChange}
                   className="border border-teal-300 w-full text-white px-4 py-2 rounded-full bg-transparent outline-none font-inter placeholder:text-white"
                 />
               </div>
               <div>
                 <input
                   required
+                  name="email"
                   type="email"
+                  value={details.email}
+                  onChange={handleChange}
                   placeholder="Email"
                   className="border border-teal-300 w-full text-white px-4 py-2 rounded-full bg-transparent outline-none font-inter placeholder:text-white"
                 />
@@ -51,15 +114,22 @@ function Signup() {
               <div>
                 <input
                   required
+                  name="password"
                   type="password"
+                  value={details.password}
+                  onChange={handleChange}
                   placeholder="password"
                   className="border border-teal-300 w-full text-white px-4 py-2 rounded-full bg-transparent outline-none font-inter placeholder:text-white"
                 />
               </div>
               <div>
-                <div className="p-2 text-center  text-white font-inter bg-[#01162A] rounded-full ">
+                <button
+                  onClick={handleSubmit}
+                  type="submit"
+                  className="p-2 w-full text-center text-white font-inter bg-[#01162A] rounded-full"
+                >
                   Sign up
-                </div>
+                </button>
               </div>
             </div>
           </article>
@@ -77,8 +147,8 @@ function Signup() {
               <Image
                 src="/svg/Google Icon.svg"
                 alt="google auth"
-                width={30}
-                height={30}
+                width={20}
+                height={20}
               />
               Google
             </div>
