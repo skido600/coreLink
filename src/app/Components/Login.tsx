@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 function Login() {
@@ -12,11 +13,22 @@ function Login() {
               Link
             </span>
           </h1>
-          <article className=" flex flex-col justify-center  gap-y-8 mt-12">
+          <article className=" flex flex-col justify-center  gap-y-2 mt-12">
             <div>
-              <p className="bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
-                Create an Account
+              <p className="bg-gradient-to-r text-[2rem] font-inter from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
+                Login in
               </p>
+            </div>
+
+            <div className="mt-2 mb-8">
+              <Link href="/signup">
+                <p className="font-Ibm text-white text-[15px]">
+                  Didn&apos;t have an account?{" "}
+                  <span className="bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
+                    Signup
+                  </span>
+                </p>
+              </Link>
             </div>
 
             <div className="mt-2  flex flex-col  gap-8">
@@ -36,20 +48,12 @@ function Login() {
                 />
               </div>
               <div>
-                <div className="px-2 flex items-center text-white font-inter border border-teal-300 rounded-full py-1  gap-2 justify-center">
+                <div className="p-2 text-center  text-white font-inter bg-teal-400 rounded-full ">
                   Login
                 </div>
               </div>
             </div>
           </article>
-          <div className="mt-6">
-            <p className="font-Ibm text-white text-[15px]">
-              Didn&apos;t have an account?{" "}
-              <span className="bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
-                Signup
-              </span>
-            </p>
-          </div>
 
           <menu className="mt-8 flex gap-2">
             <input type="checkbox" />

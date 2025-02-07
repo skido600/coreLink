@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 function Signup() {
   return (
@@ -14,17 +15,18 @@ function Signup() {
           </h1>
           <article className=" flex flex-col justify-center  gap-y-8 mt-12">
             <div>
-              <p className="bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
+              <p className="bg-gradient-to-r text-[2rem] font-inter from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
                 Create an Account
               </p>
               <div className="mt-2">
-                <p className="font-Ibm text-white">
-                  Already have an account ?
-                  <span className="bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
-                    {" "}
-                    Log In
-                  </span>
-                </p>
+                <Link href="/login">
+                  <p className="font-Ibm text-white">
+                    Already have an account ?{" "}
+                    <span className="bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
+                      Log In
+                    </span>
+                  </p>
+                </Link>
               </div>
             </div>
 
@@ -54,7 +56,7 @@ function Signup() {
                 />
               </div>
               <div>
-                <div className="px-2 flex items-center text-white font-inter border border-teal-300 rounded-full py-1  gap-2 justify-center">
+                <div className="p-2 text-center  text-white font-inter bg-teal-400 rounded-full ">
                   Sign up
                 </div>
               </div>
