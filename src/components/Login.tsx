@@ -17,7 +17,7 @@ function Login() {
     togglePasswordVisibility,
   } = useLogin();
   return (
-    <main className="bg-[#181a1f] min-h-screen md:px-4 py-5 grid md:grid-cols-2 relative">
+    <main className="bg-[#181a1f] min-h-screen md:px-4 py-[7rem] lg:py-4 grid md:grid-cols-2 relative">
       <section className="bg-[#03346E] py-2 px-4 mx-4 md:py-4 relative rounded-lg">
         <h1 className="text-3xl text-white font-inter font-bold">
           Core

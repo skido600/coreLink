@@ -4,7 +4,7 @@ function Loader() {
   return (
     <>
       <main className="flex justify-center items-center">
-        <div className="container_main"> </div>
+        <div className="loader_admin"> </div>
       </main>
     </>
   );

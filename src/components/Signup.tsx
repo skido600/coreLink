@@ -19,8 +19,8 @@ function Signup() {
     handleCheckboxChange,
   } = useSignup();
   return (
-    <main className="bg-[#181a1f] min-h-screen md:px-4 py-5 grid md:grid-cols-2 relative">
-      <section className="bg-[#03346E] py-2 px-4 mx-4 md:py-4 relative rounded-lg">
+    <main className="bg-[#181a1f] min-h-screen  md:px-4 py-[7rem] lg:py-4 grid md:grid-cols-2 relative">
+      <section className="bg-[#03346E] py-2 px-4  mx-4 md:py-4 relative rounded-lg">
         <h1 className="text-3xl text-white font-inter font-bold">
           Core
           <span className="bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
@@ -101,7 +101,10 @@ function Signup() {
           </label>
         </menu>
         <div className="mt-2 flex items-center px-2 bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
-          <hr className="border-[#ec9393] flex-grow" /> or Register with{" "}
+          <hr className="border-[#CBCBCB] flex-grow" />{" "}
+          <p className=" bg-gradient-to-r from-[#6857F6] px-2 to-[#A549E2] bg-clip-text text-transparent">
+            or register with
+          </p>
           <hr className="border-[#CBCBCB] flex-grow" />
         </div>
         <div className="mt-2">
