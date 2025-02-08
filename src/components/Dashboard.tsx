@@ -1,8 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { IoMdClose } from "react-icons/io";
+import { useToast } from "@/hooks/use-toast";
 
 const Dashboard: React.FC = () => {
+  const { toast } = useToast();
   const [products, setProducts] = useState([
     { name: "", price: "", discount: "", category: "", image: null },
   ]);
@@ -13,6 +15,7 @@ const Dashboard: React.FC = () => {
     "Books",
     "Clothes",
   ]);
+  //   console.log(products);
   const [newCategory, setNewCategory] = useState<string>("");
 
   const handleProductChange = (
@@ -38,6 +41,11 @@ const Dashboard: React.FC = () => {
     }
   };
 
+  // Remove category by index
+  const handleRemoveCategory = (index: number) => {
+    setCategories(categories.filter((_, i) => i !== index));
+  };
+
   const handleAddCategory = (e: React.FormEvent) => {
     e.preventDefault();
     if (newCategory && !categories.includes(newCategory)) {
@@ -46,7 +54,43 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  const handleUpload = () => {
+  // ai helped
+  const handleUpload = async () => {
+    for (let i = 0; i < products.length; i++) {
+      const { name, price, category, image } = products[i];
+      if (!name || !price || !category || !image) {
+        toast({
+          description: `Error: Product ${i + 1} is missing required fields.`,
+          variant: "destructive",
+        });
+        return;
+      }
+    }
+
+    const formData = new FormData();
+    console.log(formData);
+    products.forEach((product, index) => {
+      formData.append(`products[${index}][name]`, product.name);
+      formData.append(`products[${index}][price]`, product.price);
+      formData.append(`products[${index}][discount]`, product.discount);
+      formData.append(`products[${index}][category]`, product.category);
+      if (product.image) {
+        formData.append(`products[${index}][image]`, product.image);
+      }
+    });
+    //
+    try {
+      await fetch("/api/store", {
+        method: "POST",
+        body: formData,
+      });
+    } catch (error) {
+      toast({
+        description: `Error ${error}`,
+        variant: "destructive",
+      });
+      console.error(error);
+    }
     console.log("Uploading products:", products);
   };
 
@@ -56,9 +100,15 @@ const Dashboard: React.FC = () => {
       <aside className="w-full md:w-1/4 bg-gray-100 p-6 border-r border-gray-200 rounded-lg md:block">
         <h2 className="text-2xl font-bold mb-4">Categories</h2>
         <ul className="mb-4">
-          {categories.map((cat) => (
-            <li key={cat} className="mb-2 cursor-pointer font-inter">
-              {cat}
+          {categories.map((cat, index) => (
+            <li key={cat} className="mb-2 flex items-center justify-between">
+              <span className="cursor-pointer font-inter">{cat}</span>
+              <button
+                onClick={() => handleRemoveCategory(index)}
+                className="text-red-600 hover:bg-red-200 rounded-full p-1"
+              >
+                <IoMdClose size={20} />
+              </button>
             </li>
           ))}
         </ul>

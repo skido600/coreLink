@@ -1,0 +1,58 @@
+{
+  "products": [
+    {
+      "id": "17390546783120",
+      "name": "llll",
+      "price": 1,
+      "discount": 22,
+      "category": "Electronics",
+      "image": "/uploads/1739054678307-images_(1).jpeg",
+      "createdAt": "2025-02-08T22:44:38.312Z"
+    },
+    {
+      "id": "17390546783151",
+      "name": "moto",
+      "price": 12,
+      "discount": 1,
+      "category": "Electronics",
+      "image": "/uploads/1739054678312-images_(2).jpeg",
+      "createdAt": "2025-02-08T22:44:38.315Z"
+    },
+    {
+      "id": "17390546816750",
+      "name": "llll",
+      "price": 1,
+      "discount": 22,
+      "category": "Electronics",
+      "image": "/uploads/1739054681672-images_(1).jpeg",
+      "createdAt": "2025-02-08T22:44:41.675Z"
+    },
+    {
+      "id": "17390546816771",
+      "name": "moto",
+      "price": 12,
+      "discount": 1,
+      "category": "Electronics",
+      "image": "/uploads/1739054681675-images_(2).jpeg",
+      "createdAt": "2025-02-08T22:44:41.677Z"
+    },
+    {
+      "id": "17390547011930",
+      "name": "llll",
+      "price": 1,
+      "discount": 22,
+      "category": "Electronics",
+      "image": "/uploads/1739054701189-images_(1).jpeg",
+      "createdAt": "2025-02-08T22:45:01.193Z"
+    },
+    {
+      "id": "17390547011981",
+      "name": "moto",
+      "price": 12,
+      "discount": 1,
+      "category": "Electronics",
+      "image": "/uploads/1739054701193-images_(2).jpeg",
+      "createdAt": "2025-02-08T22:45:01.198Z"
+    }
+  ]
+}

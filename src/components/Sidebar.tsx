@@ -1,19 +1,27 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
 import Link from "next/link";
 import { CgMenuRight } from "react-icons/cg";
 import {
   FiHome,
   FiBox,
-  FiUsers,
+  // FiUsers,
   FiSettings,
   FiLink,
   FiX,
 } from "react-icons/fi";
-import { FaChartLine } from "react-icons/fa";
+// import { FaChartLine } from "react-icons/fa";
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [isOpen]);
   const menuItems = [
     {
       name: "Dashboard",
@@ -23,25 +31,29 @@ function Sidebar() {
     {
       name: "Products",
       icon: <FiBox className="icon" />,
-      path: "/admin/products",
+      path: "/admin",
     },
-
+    // {
+    //   name: "Manegment",
+    //   icon: <FiBox className="icon" />,
+    //   path: "/admin",
+    // },
     {
       name: "Shared Links",
-      icon: <FiLink className="icon" />,
+      icon: <FiLink className="ico" />,
       path: "/admin/links",
     },
 
-    {
-      name: "Workers",
-      icon: <FiUsers className="icon" />,
-      path: "/admin/workers",
-    },
-    {
-      name: "Analytics",
-      icon: <FaChartLine className="icon" />,
-      path: "/analytics",
-    },
+    // {
+    //   name: "Workers",
+    //   icon: <FiUsers className="icon" />,
+    //   path: "/admin/workers",
+    // },
+    // {
+    //   name: "Analytics",
+    //   icon: <FaChartLine className="icon" />,
+    //   path: "/analytics",
+    // },
     {
       name: "Settings",
       icon: <FiSettings className="icon" />,
