@@ -30,7 +30,7 @@ export default function AdminLayout({
             </div>
           </div>
           {/* Page Content with mobile padding */}
-          <main className="p-4 md:p-6 min-h-screen">{children}</main>
+          <main className="p-4 md:p-6 ">{children}</main>
         </div>
       </div>
     </ProtectedRoute>

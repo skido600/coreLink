@@ -6,7 +6,7 @@ import {
   FiBox,
   FiUsers,
   FiSettings,
-  FiUser,
+  FiLink,
   FiX,
 } from "react-icons/fi";
 import { FaChartLine } from "react-icons/fa";
@@ -19,11 +19,22 @@ function Sidebar() {
       icon: <FiHome className="icon" />,
       path: "/dashboard",
     },
-    { name: "Products", icon: <FiBox className="icon" />, path: "/products" },
     {
-      name: "Employees",
+      name: "Products",
+      icon: <FiBox className="icon" />,
+      path: "/products",
+    },
+
+    {
+      name: "Shared Links",
+      icon: <FiLink className="icon" />,
+      path: "/links",
+    },
+
+    {
+      name: "Workers",
       icon: <FiUsers className="icon" />,
-      path: "/employees",
+      path: "/workers",
     },
     {
       name: "Analytics",
@@ -35,7 +46,6 @@ function Sidebar() {
       icon: <FiSettings className="icon" />,
       path: "/settings",
     },
-    { name: "Profile", icon: <FiUser className="icon" />, path: "/profile" },
   ];
 
   return (
