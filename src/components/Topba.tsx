@@ -23,7 +23,7 @@ export default function Topba() {
         <div>
           <button
             onClick={handleToggle}
-            className="p-2 rounded-lg hover:bg-gray-200 transition-colors duration-200"
+            className="p-2 rounded-lg bg-gray-200 transition-colors duration-200"
           >
             {toggle ? <MdDarkMode /> : <CiLight />}
           </button>
