@@ -90,8 +90,14 @@ function Sidebar() {
         </div>
 
         {/* Menu Items */}
+
         <nav className="h-[50vh] md:h-auto overflow-y-auto">
           <ul className="space-y-">
+            <div>
+              <h1 className="text-gray-600  font-medium font-inter mb-4">
+                Menu
+              </h1>
+            </div>
             {menuItems.map((item) => (
               <li key={item.name}>
                 <Link
