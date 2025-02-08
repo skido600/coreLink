@@ -96,7 +96,7 @@ function Sidebar() {
               <li key={item.name}>
                 <Link
                   href={item.path}
-                  className="flex items-center md:py-3 md:px-0 py-1 px-2 rounded-lg transition-all
+                  className="flex items-center md:py-3 md:px-0 py-3 px-2 rounded-lg transition-all
                     hover:bg-gradient-to-r from-[#6857F610] to-[#A549E210]
                   
                     text-gray-600"
