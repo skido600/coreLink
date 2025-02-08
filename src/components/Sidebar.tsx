@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Link from "next/link";
 import { CgMenuRight } from "react-icons/cg";
 import {
   FiHome,
@@ -17,24 +18,24 @@ function Sidebar() {
     {
       name: "Dashboard",
       icon: <FiHome className="icon" />,
-      path: "/dashboard",
+      path: "/admin/dashboard",
     },
     {
       name: "Products",
       icon: <FiBox className="icon" />,
-      path: "/products",
+      path: "/admin/products",
     },
 
     {
       name: "Shared Links",
       icon: <FiLink className="icon" />,
-      path: "/links",
+      path: "/admin/links",
     },
 
     {
       name: "Workers",
       icon: <FiUsers className="icon" />,
-      path: "/workers",
+      path: "/admin/workers",
     },
     {
       name: "Analytics",
@@ -44,15 +45,18 @@ function Sidebar() {
     {
       name: "Settings",
       icon: <FiSettings className="icon" />,
-      path: "/settings",
+      path: "/admin/settings",
     },
   ];
+  const handleToggle: () => void = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <>
       {/* Mobile Menu Button */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={handleToggle}
         className="md:hidden fixed top-1 left-2 z-50 p-2 rounded-lg  text-[#]"
       >
         {isOpen ? <FiX size={24} /> : <CgMenuRight size={24} />}
@@ -61,14 +65,14 @@ function Sidebar() {
       {/* self colse div */}
       {isOpen && (
         <div
-          className="md:hidden fixed inset-0 bg-black/50 z-40"
-          onClick={() => setIsOpen(false)}
+          className="md:hidden fixed inset-0 bg-[#06141799] backdrop-blur-sm z-40"
+          onClick={handleToggle}
         />
       )}
 
       {/* Sidebar */}
       <div
-        className={`h-screen w-64 fixed left-0 top-0 bg-white border-r border-gray-200 shadow-lg p-6
+        className={`h-screen w-64 fixed left-0 top-0 bg-[#FBFBFB] border-r border-[#E5E5E5] p-6
           transform transition-transform overflow-y-auto duration-300 ease-in-out
           ${
             isOpen ? "translate-x-0" : "-translate-x-full"
@@ -87,20 +91,20 @@ function Sidebar() {
 
         {/* Menu Items */}
         <nav className="h-[50vh] md:h-auto overflow-y-auto">
-          <ul className="space-y-1">
+          <ul className="space-y-">
             {menuItems.map((item) => (
               <li key={item.name}>
-                <a
+                <Link
                   href={item.path}
-                  className="flex items-center p-3 rounded-lg transition-all
+                  className="flex items-center md:py-3 md:px-0 py-1 px-2 rounded-lg transition-all
                     hover:bg-gradient-to-r from-[#6857F610] to-[#A549E210]
                   
                     text-gray-600"
-                  onClick={() => setIsOpen(false)}
+                  onClick={handleToggle}
                 >
                   <span className="mr-3 text-xl ">{item.icon}</span>
                   <span className="font-medium font-inter">{item.name}</span>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -110,7 +114,7 @@ function Sidebar() {
         {/* <div className="absolute top-0 right-0 w-1 h-16 bg-gradient-to-b from-[#6857F6] to-[#A549E2] rounded-l-full" /> */}
 
         {/* Bottom Profile */}
-        <div className="absolute bottom-6 left-6 right-6 border-t border-gray-100 pt-4">
+        <div className="absolute bottom-0 mb-4 left-6 right-6 border-t border-gray-100 pt-4">
           <div className="flex items-center">
             <div className="h-10 w-10 bg-gradient-to-r from-[#6857F6] to-[#A549E2] rounded-full" />
             <div className="ml-3">

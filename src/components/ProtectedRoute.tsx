@@ -19,7 +19,7 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   }, [user, loading, router]);
 
   if (loading) {
-    return <Loader_2 />; // Show loading state
+    return <Loader_2 />;
   }
 
   return user ? <>{children}</> : null; // Render children only if user is authenticated

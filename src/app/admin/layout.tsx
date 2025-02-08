@@ -15,7 +15,7 @@ export default function AdminLayout({
 }) {
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-gray-100 flex flex-col md:flex-row">
+      <div className="min-h-screen bg-[] flex flex-col md:flex-row">
         <div className="fixed md:relative left-0 top-0 h-screen z-50">
           <Sidebar />
         </div>
@@ -24,7 +24,7 @@ export default function AdminLayout({
         <div className="flex-1 md:ml-64">
           {" "}
           {/* Topbar with mobile adjustments */}
-          <div className="sticky top-0 z-40 bg-white shadow-sm md:shadow-none">
+          <div className="sticky top-0 z-40 bg-[#FBFBFB] border-[#E5E5E5]   border-b  shadow-sm md:shadow-none">
             <div className="px-4 md:px-6 py-3">
               <Topba />
             </div>
