@@ -95,3 +95,11 @@
 //   const downloadUrl = await getDownloadURL(storageRef);
 //   return downloadUrl;
 // }
+
+// export async function POST(request: Request) {
+//   try {
+//     const formData = await request.formData();
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }

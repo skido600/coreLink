@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 
 const Dashboard: React.FC = () => {
   const { toast } = useToast();
+  const [loading, setloading] = useState<boolean>(false);
   const [products, setProducts] = useState([
     { name: "", price: "", discount: "", category: "", image: null },
   ]);
@@ -54,8 +55,8 @@ const Dashboard: React.FC = () => {
     }
   };
 
-  // ai helped
   const handleUpload = async () => {
+    // First, validate all products
     for (let i = 0; i < products.length; i++) {
       const { name, price, category, image } = products[i];
       if (!name || !price || !category || !image) {
@@ -67,31 +68,43 @@ const Dashboard: React.FC = () => {
       }
     }
 
-    const formData = new FormData();
-    console.log(formData);
-    products.forEach((product, index) => {
-      formData.append(`products[${index}][name]`, product.name);
-      formData.append(`products[${index}][price]`, product.price);
-      formData.append(`products[${index}][discount]`, product.discount);
-      formData.append(`products[${index}][category]`, product.category);
-      if (product.image) {
-        formData.append(`products[${index}][image]`, product.image);
-      }
-    });
-    //
+    setloading(true);
     try {
-      await fetch("/api/store", {
-        method: "POST",
-        body: formData,
+      // Upload each product only once
+      for (const product of products) {
+        const formData = new FormData();
+        formData.append("name", product.name);
+        formData.append("price", product.price);
+        formData.append("category", product.category);
+        formData.append("discount", product.discount);
+        if (product.image) {
+          formData.append("image", product.image);
+        }
+        console.log(formData);
+        const response = await fetch("/api/store", {
+          method: "POST",
+          body: formData,
+        });
+        if (!response.ok) {
+          throw new Error(`Failed to upload product: ${product.name}`);
+        }
+      }
+      toast({
+        title: "Success!",
+        description: "All products uploaded successfully!",
+        variant: "successful",
       });
+      setProducts([
+        { name: "", price: "", discount: "", category: "", image: null },
+      ]);
     } catch (error) {
       toast({
-        description: `Error ${error}`,
+        description: `${error}`,
         variant: "destructive",
       });
-      console.error(error);
+    } finally {
+      setloading(false);
     }
-    console.log("Uploading products:", products);
   };
 
   return (
@@ -239,7 +252,7 @@ const Dashboard: React.FC = () => {
             onClick={handleUpload}
             className="w-full py-3 px-6 font-inter rounded-md bg-[#3A7D44] text-white"
           >
-            Upload All Products
+            {loading ? "loadind..." : "   Upload All Products"}
           </button>
         )}
       </main>
