@@ -81,7 +81,7 @@ const Dashboard: React.FC = () => {
           formData.append("image", product.image);
         }
         console.log(formData);
-        const response = await fetch("/api/store", {
+        const response = await fetch("", {
           method: "POST",
           body: formData,
         });
