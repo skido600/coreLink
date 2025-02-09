@@ -249,10 +249,11 @@ const Dashboard: React.FC = () => {
         {/* Upload All Button */}
         {products.length > 0 && (
           <button
+            disabled={loading}
             onClick={handleUpload}
             className="w-full py-3 px-6 font-inter rounded-md bg-[#3A7D44] text-white"
           >
-            {loading ? "loadind..." : "   Upload All Products"}
+            {loading ? "uploading..." : "   Upload All Products"}
           </button>
         )}
       </main>
