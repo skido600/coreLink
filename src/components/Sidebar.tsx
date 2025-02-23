@@ -31,29 +31,15 @@ function Sidebar() {
     {
       name: "Products",
       icon: <FiBox className="icon" />,
-      path: "/admin",
+      path: "/admin/products",
     },
-    // {
-    //   name: "Manegment",
-    //   icon: <FiBox className="icon" />,
-    //   path: "/admin",
-    // },
+
     {
       name: "Shared Links",
       icon: <FiLink className="ico" />,
       path: "/admin/links",
     },
 
-    // {
-    //   name: "Workers",
-    //   icon: <FiUsers className="icon" />,
-    //   path: "/admin/workers",
-    // },
-    // {
-    //   name: "Analytics",
-    //   icon: <FaChartLine className="icon" />,
-    //   path: "/analytics",
-    // },
     {
       name: "Settings",
       icon: <FiSettings className="icon" />,

@@ -2,6 +2,9 @@
 import React, { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useToast } from "@/hooks/use-toast";
+import { collection, addDoc } from "firebase/firestore";
+import { firestore } from "@/app/firebase/ultil";
+import { getAuth } from "firebase/auth";
 
 const Dashboard: React.FC = () => {
   const { toast } = useToast();
@@ -16,7 +19,7 @@ const Dashboard: React.FC = () => {
     "Books",
     "Clothes",
   ]);
-  //   console.log(products);
+
   const [newCategory, setNewCategory] = useState<string>("");
 
   const handleProductChange = (
@@ -54,9 +57,17 @@ const Dashboard: React.FC = () => {
       setNewCategory("");
     }
   };
-
   const handleUpload = async () => {
-    // First, validate all products
+    const auth = getAuth();
+    const currentUser = auth.currentUser;
+    if (!currentUser) {
+      toast({
+        description: "User not authenticated.",
+        variant: "destructive",
+      });
+      return;
+    }
+    // Validate all products
     for (let i = 0; i < products.length; i++) {
       const { name, price, category, image } = products[i];
       if (!name || !price || !category || !image) {
@@ -70,30 +81,59 @@ const Dashboard: React.FC = () => {
 
     setloading(true);
     try {
-      // Upload each product only once
       for (const product of products) {
-        const formData = new FormData();
-        formData.append("name", product.name);
-        formData.append("price", product.price);
-        formData.append("category", product.category);
-        formData.append("discount", product.discount);
-        if (product.image) {
-          formData.append("image", product.image);
+        if (!product.image) {
+          throw new Error("Image is required for all products");
         }
-        console.log(formData);
-        const response = await fetch("", {
-          method: "POST",
-          body: formData,
-        });
-        if (!response.ok) {
-          throw new Error(`Failed to upload product: ${product.name}`);
+
+        // Step 1: Upload image to Cloudinary
+        const cloudinaryFormData = new FormData();
+        cloudinaryFormData.append("file", product.image);
+        cloudinaryFormData.append(
+          "upload_preset",
+          process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET!
+        );
+        cloudinaryFormData.append(
+          "cloud_name",
+          process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME!
+        );
+
+        const cloudinaryResponse = await fetch(
+          `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`, // Use environment variable
+          {
+            method: "POST",
+            body: cloudinaryFormData,
+          }
+        );
+
+        if (!cloudinaryResponse.ok) {
+          throw new Error("Failed to upload image to Cloudinary");
         }
+
+        const cloudinaryData = await cloudinaryResponse.json();
+        const imageUrl = cloudinaryData.secure_url;
+        console.log(cloudinaryData);
+
+        const productData = {
+          name: product.name,
+          price: parseFloat(product.price),
+          discount: parseFloat(product.discount || "0"),
+          category: product.category,
+          imageUrl: imageUrl,
+          userId: currentUser.uid,
+        };
+
+        await addDoc(collection(firestore, "products"), productData);
       }
+
+      // Success message
       toast({
         title: "Success!",
         description: "All products uploaded successfully!",
         variant: "successful",
       });
+
+      // Reset the form
       setProducts([
         { name: "", price: "", discount: "", category: "", image: null },
       ]);
