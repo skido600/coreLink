@@ -111,8 +111,8 @@ export default function AdminProductsPage() {
               <Image
                 src={product.imageUrl}
                 alt={product.name}
-                width={100}
-                height={100}
+                width={300}
+                height={300}
                 style={{ objectFit: "cover" }}
               />
               <h2 className="text-xl font-bold">{product.name}</h2>

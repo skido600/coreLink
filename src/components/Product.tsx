@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { FaTrash, FaEdit } from "react-icons/fa";
+// import { FaTrash, FaEdit } from "react-icons/fa";
 interface ProductProps {
   product: {
     id?: string;
@@ -15,14 +15,6 @@ const Product: React.FC<ProductProps> = ({ product }) => {
   const discountedPrice =
     product.price - (product.price * product.discount) / 100;
 
-  const handleDelete = () => {
-    alert("Delete product");
-  };
-
-  const handleEdit = () => {
-    alert("Edit product");
-  };
-
   return (
     <section className="relative w-52 bg-white shadow-lg overflow-hidden">
       {/* Product Image with Overlay Icons */}
@@ -33,20 +25,6 @@ const Product: React.FC<ProductProps> = ({ product }) => {
           fill
           style={{ objectFit: "cover" }}
         />
-        <div className="absolute top-2 right-2 flex gap-2">
-          <button
-            onClick={handleEdit}
-            className="p-2 bg-white shadow-md rounded-full hover:bg-blue-100 transition duration-300"
-          >
-            <FaEdit className="text-blue-600 text-sm" />
-          </button>
-          <button
-            onClick={handleDelete}
-            className="p-2 bg-white shadow-md rounded-full hover:bg-red-100 transition duration-300"
-          >
-            <FaTrash className="text-red-600 text-sm" />
-          </button>
-        </div>
       </div>
 
       {/* Product Details */}
