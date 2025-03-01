@@ -1,208 +1,206 @@
-// "use client";
-// import React, { useEffect, useState } from "react";
-// import { collection, query, getDocs, doc, updateDoc } from "firebase/firestore";
-// import { firestore } from "@/app/firebase/ultil";
-// import { useToast } from "@/hooks/use-toast";
-
-// interface ProductData {
-//   id: string;
-//   name: string;
-//   price: number;
-//   discount: number;
-//   imageUrl: string;
-//   userId: string;
-// }
-
-// export default function AdminProducts() {
-//   const [products, setProducts] = useState<ProductData[]>([]);
-//   const [loading, setLoading] = useState(true);
-//   const [editingProduct, setEditingProduct] = useState<ProductData | null>(
-//     null
-//   );
-//   const [form, setForm] = useState({
-//     name: "",
-//     price: "",
-//     discount: "",
-//     imageUrl: "",
-//   });
-//   const { toast } = useToast();
-
-//   useEffect(() => {
-//     async function fetchProducts() {
-//       try {
-//         // Query all products from Firestore (or add filters as needed)
-//         const q = query(collection(firestore, "products"));
-//         const querySnapshot = await getDocs(q);
-//         const productsData = querySnapshot.docs.map((doc) => ({
-//           id: doc.id,
-//           ...doc.data(),
-//         })) as ProductData[];
-//         setProducts(productsData);
-//       } catch (error) {
-//         console.error("Error fetching products:", error);
-//       } finally {
-//         setLoading(false);
-//       }
-//     }
-//     fetchProducts();
-//   }, []);
-
-//   // Called when admin clicks the "Edit" button
-//   const handleEdit = (product: ProductData) => {
-//     setEditingProduct(product);
-//     setForm({
-//       name: product.name,
-//       price: product.price.toString(),
-//       discount: product.discount.toString(),
-//       imageUrl: product.imageUrl,
-//     });
-//   };
-
-//   // Update product in Firestore and local state
-//   const handleUpdate = async () => {
-//     if (!editingProduct) return;
-//     try {
-//       const productRef = doc(firestore, "products", editingProduct.id);
-//       await updateDoc(productRef, {
-//         name: form.name,
-//         price: parseFloat(form.price),
-//         discount: parseFloat(form.discount),
-//         imageUrl: form.imageUrl,
-//       });
-//       toast({
-//         title: "Updated",
-//         description: "Product updated successfully",
-//         variant: "successful",
-//       });
-//       // Update local state after successful update
-//       setProducts(
-//         products.map((p) =>
-//           p.id === editingProduct.id
-//             ? {
-//                 ...p,
-//                 name: form.name,
-//                 price: parseFloat(form.price),
-//                 discount: parseFloat(form.discount),
-//                 imageUrl: form.imageUrl,
-//               }
-//             : p
-//         )
-//       );
-//       setEditingProduct(null);
-//     } catch (error) {
-//       console.error("Error updating product:", error);
-//       toast({
-//         description: "Error updating product",
-//         variant: "destructive",
-//       });
-//     }
-//   };
-
-//   // Generate a shareable link for the product and copy to clipboard
-//   const shareLink = (product: ProductData) => {
-//     // Adjust the URL as needed. Here we assume a public product page route.
-//     const link = `${window.location.origin}/products/${product.userId}?productId=${product.id}`;
-//     navigator.clipboard.writeText(link);
-//     toast({
-//       description: "Link copied to clipboard!",
-//       variant: "successful",
-//     });
-//   };
-
-//   return (
-//     <div className="container mx-auto p-4">
-//       <h1 className="text-2xl font-bold mb-4">Admin Products</h1>
-//       {loading ? (
-//         <p>Loading products...</p>
-//       ) : products.length === 0 ? (
-//         <p>No products found.</p>
-//       ) : (
-//         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-//           {products.map((product) => (
-//             <div key={product.id} className="border p-4 rounded shadow">
-//               <img
-//                 src={product.imageUrl}
-//                 alt={product.name}
-//                 className="w-full h-40 object-cover mb-2"
-//               />
-//               <h2 className="text-xl font-bold">{product.name}</h2>
-//               <p>Price: ${product.price}</p>
-//               <p>Discount: {product.discount}%</p>
-//               <div className="flex gap-2 mt-2">
-//                 <button
-//                   onClick={() => handleEdit(product)}
-//                   className="px-2 py-1 bg-blue-500 text-white rounded"
-//                 >
-//                   Edit
-//                 </button>
-//                 <button
-//                   onClick={() => shareLink(product)}
-//                   className="px-2 py-1 bg-green-500 text-white rounded"
-//                 >
-//                   Share Link
-//                 </button>
-//               </div>
-//             </div>
-//           ))}
-//         </div>
-//       )}
-
-//       {/* Edit Modal */}
-//       {editingProduct && (
-//         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-//           <div className="bg-white p-6 rounded shadow-lg w-96">
-//             <h2 className="text-xl font-bold mb-4">Edit Product</h2>
-//             <input
-//               type="text"
-//               placeholder="Name"
-//               value={form.name}
-//               onChange={(e) => setForm({ ...form, name: e.target.value })}
-//               className="border p-2 mb-2 w-full"
-//             />
-//             <input
-//               type="number"
-//               placeholder="Price"
-//               value={form.price}
-//               onChange={(e) => setForm({ ...form, price: e.target.value })}
-//               className="border p-2 mb-2 w-full"
-//             />
-//             <input
-//               type="number"
-//               placeholder="Discount"
-//               value={form.discount}
-//               onChange={(e) => setForm({ ...form, discount: e.target.value })}
-//               className="border p-2 mb-2 w-full"
-//             />
-//             <input
-//               type="text"
-//               placeholder="Image URL"
-//               value={form.imageUrl}
-//               onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
-//               className="border p-2 mb-2 w-full"
-//             />
-//             <div className="flex gap-2">
-//               <button
-//                 onClick={handleUpdate}
-//                 className="px-4 py-2 bg-green-500 text-white rounded"
-//               >
-//                 Update
-//               </button>
-//               <button
-//                 onClick={() => setEditingProduct(null)}
-//                 className="px-4 py-2 bg-gray-500 text-white rounded"
-//               >
-//                 Cancel
-//               </button>
-//             </div>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
-
-function page() {
-  return <div>page</div>;
+"use client";
+import React, { useEffect, useState } from "react";
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
+import { firestore } from "../../firebase/ultil";
+import { useToast } from "@/hooks/use-toast";
+import Image from "next/image";
+import { useUserUid } from "@/context/useUserUid";
+import { TbCurrencyNaira } from "react-icons/tb";
+interface ProductData {
+  id: string;
+  name: string;
+  price: number;
+  discount: number;
+  imageUrl: string;
+  userId: string;
 }
 
-export default page;
+export default function AdminProductsPage() {
+  // const [userUid, setUserUid] = useState<string | null>(null);
+  const [products, setProducts] = useState<ProductData[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [updating, setUpdating] = useState(false);
+  const [editingProduct, setEditingProduct] = useState<ProductData | null>(
+    null
+  );
+  const [form, setForm] = useState({
+    name: "",
+    price: "",
+    discount: "",
+    imageUrl: "",
+  });
+  const userUid = useUserUid();
+  const { toast } = useToast();
+
+  useEffect(() => {
+    async function fetchProducts() {
+      if (!userUid) return;
+      try {
+        // Query Firestore for products belonging to the logged-in user
+        const q = query(
+          collection(firestore, "products"),
+          where("userId", "==", userUid)
+        );
+        const querySnapshot = await getDocs(q);
+        const productsData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as ProductData[];
+
+        setProducts(productsData);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProducts();
+  }, [userUid]);
+
+  // Handle edit action
+  const handleEdit = (product: ProductData) => {
+    setEditingProduct(product);
+    setForm({
+      name: product.name,
+      price: product.price.toString(),
+      discount: product.discount.toString(),
+      imageUrl: product.imageUrl,
+    });
+  };
+
+  // Update Firestore document
+  const handleUpdate = async () => {
+    if (!editingProduct) return;
+    setUpdating(true);
+    try {
+      const productRef = doc(firestore, "products", editingProduct.id);
+      await updateDoc(productRef, {
+        name: form.name,
+        price: parseFloat(form.price),
+        discount: parseFloat(form.discount),
+        imageUrl: form.imageUrl,
+      });
+
+      toast({
+        title: "Updated",
+        description: "Product updated successfully",
+        variant: "successful",
+      });
+
+      setProducts((prev) =>
+        prev.map((p) =>
+          p.id === editingProduct.id
+            ? {
+                ...p,
+                name: form.name,
+                price: parseFloat(form.price),
+                discount: parseFloat(form.discount),
+                imageUrl: form.imageUrl,
+              }
+            : p
+        )
+      );
+
+      setEditingProduct(null);
+    } catch (error) {
+      console.error("Error updating product:", error);
+      toast({ description: "Error updating product", variant: "destructive" });
+    } finally {
+      setUpdating(false);
+    }
+  };
+
+  return (
+    <div className="container mx-auto px-2">
+      <h1 className="text-2xl font-bold mb-4 font-Ibm">Admin Products</h1>
+
+      {loading ? (
+        <p className="font-meta">Loading products...</p>
+      ) : products.length === 0 ? (
+        <p>No products found.</p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {products.map((product) => (
+            <div key={product.id} className="border px-3 py-2  rounded shadow">
+              <div className="relative h-48 w-70 mb-4">
+                <Image
+                  src={product.imageUrl}
+                  alt={product.name}
+                  fill
+                  className="rounded-sm"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+              <h2 className="text-xl font-bold font-inter">{product.name}</h2>
+              <p className="font-inter flex items-center">
+                Price: <TbCurrencyNaira />
+                {product.price}
+              </p>
+              <p className="font-inter">Discount: {product.discount}%</p>
+              <button
+                onClick={() => handleEdit(product)}
+                className="px-2 py-1 bg-gradient-to-r from-[#6857F6] to-[#A549E2]  text-white rounded mt-2 font-inter"
+              >
+                Edit
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Edit Modal */}
+      {editingProduct && (
+        <div className="fixed inset-0 p-4 bg-[#06141799] backdrop-blur-sm bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded shadow-lg w-96">
+            <h2 className="text-xl font-bold mb-4 font-Ibm">Edit Product</h2>
+            <input
+              type="text"
+              placeholder="Name"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              className="border p-2 mb-2 w-full"
+            />
+            <input
+              type="number"
+              placeholder="Price"
+              value={form.price}
+              onChange={(e) => setForm({ ...form, price: e.target.value })}
+              className="border p-2 mb-2 w-full"
+            />
+            <input
+              type="number"
+              placeholder="Discount"
+              value={form.discount}
+              onChange={(e) => setForm({ ...form, discount: e.target.value })}
+              className="border p-2 mb-2 w-full"
+            />
+
+            <div className="flex gap-2">
+              <button
+                disabled={updating}
+                onClick={handleUpdate}
+                className="px-4 py-2 bg-gradient-to-r from-[#6857F6] to-[#A549E2] text-white rounded"
+              >
+                {updating ? "updating..." : "Update"}
+              </button>
+              <button
+                onClick={() => setEditingProduct(null)}
+                className="px-4 py-2 bg-gray-500 text-white rounded"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

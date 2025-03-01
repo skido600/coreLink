@@ -3,25 +3,11 @@ import React, { useState } from "react";
 
 import Link from "next/link";
 import { CgMenuRight } from "react-icons/cg";
-import {
-  FiHome,
-  FiBox,
-  // FiUsers,
-  FiSettings,
-  FiLink,
-  FiX,
-} from "react-icons/fi";
-// import { FaChartLine } from "react-icons/fa";
+import { FiHome, FiBox, FiLink, FiX } from "react-icons/fi";
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     document.body.style.overflow = "hidden";
-  //   } else {
-  //     document.body.style.overflow = "";
-  //   }
-  // }, [isOpen]);
+
   const menuItems = [
     {
       name: "Dashboard",
@@ -31,7 +17,7 @@ function Sidebar() {
     {
       name: "Products",
       icon: <FiBox className="icon" />,
-      path: "/admin/products",
+      path: "/admin",
     },
 
     {
@@ -40,11 +26,11 @@ function Sidebar() {
       path: "/admin/links",
     },
 
-    {
-      name: "Settings",
-      icon: <FiSettings className="icon" />,
-      path: "/admin/settings",
-    },
+    // {
+    //   name: "Settings", FiSettings,
+    //   icon: <FiSettings className="icon" />,
+    //   path: "/admin/settings",
+    // },
   ];
   const handleToggle: () => void = () => {
     setIsOpen(!isOpen);

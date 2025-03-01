@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import Loader from "@/app/helper/Loader";
+import Loader from "@/helper/Loader";
 import { useLogin } from "@/hooks/useLogin";
 
 function Login() {

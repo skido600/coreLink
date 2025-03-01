@@ -3,8 +3,10 @@ import React, { useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useToast } from "@/hooks/use-toast";
 import { collection, addDoc } from "firebase/firestore";
-import { firestore } from "@/app/firebase/ultil";
+// import { firestore } from "@/app/firebase/ultil";
+
 import { getAuth } from "firebase/auth";
+import { firestore } from "@/firebase/ultil";
 
 const Dashboard: React.FC = () => {
   const { toast } = useToast();
@@ -183,7 +185,7 @@ const Dashboard: React.FC = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 p-4 md:p-10">
+      <main className="flex-1 p- md:p-10">
         <h1 className="text-3xl font-bold mb-6 bg-gradient-to-r mt-3 from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent font-inter">
           Add Products
         </h1>

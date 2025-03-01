@@ -14,6 +14,7 @@ export default {
       fontFamily: {
         inter: ["Jost", "serif"],
         Ibm: ["IBM Plex Sans", "serif"],
+        meta: ["Playwrite AU SA Guides", "serif;"],
       },
       borderRadius: {
         lg: "var(--radius)",

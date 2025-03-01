@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { collection, query, where, getDocs } from "firebase/firestore";
-import { firestore } from "@/app/firebase/ultil";
+import { firestore } from "@/firebase/ultil";
 import Product from "@/components/Product";
 
 export default function ProductsPage() {

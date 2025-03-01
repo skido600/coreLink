@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useToast } from "@/hooks/use-toast";
-import { auth } from "@/app/firebase/ultil";
+import { auth } from "@/firebase/ultil";
 import { useRouter } from "next/navigation";
 
 export function useLogin() {

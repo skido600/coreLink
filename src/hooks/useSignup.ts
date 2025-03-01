@@ -5,7 +5,7 @@ import {
   sendEmailVerification,
 } from "firebase/auth";
 import { ref, set, serverTimestamp } from "firebase/database";
-import { auth, db } from "../app/firebase/ultil";
+import { auth, db } from "../firebase/ultil";
 import { useToast } from "@/hooks/use-toast";
 
 const errorMap: { [key: string]: string } = {

@@ -3,7 +3,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 
-import Loader from "../app/helper/Loader";
+import Loader from "../helper/Loader";
 import { useSignup } from "@/hooks/useSignup";
 
 function Signup() {
