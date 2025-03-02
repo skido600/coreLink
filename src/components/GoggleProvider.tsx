@@ -7,7 +7,7 @@ import { auth } from "@/firebase/ultil";
 import { useToast } from "@/hooks/use-toast";
 
 import { useRouter } from "next/navigation";
-// import Loader from "@/helper/Loader";
+
 import GoggleLoader from "@/helper/GoggleLoader";
 function GoggleProvider() {
   const [loading, setLoading] = useState(false);
@@ -17,9 +17,9 @@ function GoggleProvider() {
     const provider = new GoogleAuthProvider();
     setLoading(true);
     try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      console.log("Google sign-in successful:", user);
+      await signInWithPopup(auth, provider);
+      //   const user = result.user;
+      //   console.log("Google sign-in successful:", user);
       toast({
         title: "Success!",
         description:

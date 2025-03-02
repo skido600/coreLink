@@ -8,11 +8,14 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
+import { MdDeleteForever } from "react-icons/md";
 import { firestore } from "../../firebase/ultil";
 import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
 import { useUserUid } from "@/context/useUserUid";
 import { TbCurrencyNaira } from "react-icons/tb";
+import Swal from "sweetalert2";
+
 interface ProductData {
   id: string;
   name: string;
@@ -30,6 +33,7 @@ export default function AdminProductsPage() {
   const [editingProduct, setEditingProduct] = useState<ProductData | null>(
     null
   );
+
   const [form, setForm] = useState({
     name: "",
     price: "",
@@ -43,7 +47,6 @@ export default function AdminProductsPage() {
     async function fetchProducts() {
       if (!userUid) return;
       try {
-        // Query Firestore for products belonging to the logged-in user
         const q = query(
           collection(firestore, "products"),
           where("userId", "==", userUid)
@@ -117,6 +120,35 @@ export default function AdminProductsPage() {
       setUpdating(false);
     }
   };
+  const handleDelete = (product: ProductData) => {
+    Swal.fire({
+      title: "Delete Product",
+      text: "Are you sure you want to delete this product?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, Delete",
+      cancelButtonText: "Cancel",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await updateDoc(doc(firestore, "products", product.id), {
+            deleted: true,
+          });
+
+          Swal.fire("Deleted!", "Product deleted successfully.", "success");
+
+          setProducts((prev) => prev.filter((p) => p.id !== product.id));
+        } catch (error) {
+          console.error("Error deleting product:", error);
+          Swal.fire("Error", "Failed to delete product.", "error");
+        }
+      } else {
+        Swal.fire("Cancelled", "Product deletion cancelled", "info");
+      }
+    });
+  };
 
   return (
     <div className="container mx-auto px-2">
@@ -125,7 +157,9 @@ export default function AdminProductsPage() {
       {loading ? (
         <p className="font-meta">Loading products...</p>
       ) : products.length === 0 ? (
-        <p>No products found.</p>
+        <p className="font-inter text-red-500">
+          No products found or check your internet
+        </p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {products.map((product) => (
@@ -145,12 +179,17 @@ export default function AdminProductsPage() {
                 {product.price}
               </p>
               <p className="font-inter">Discount: {product.discount}%</p>
-              <button
-                onClick={() => handleEdit(product)}
-                className="px-2 py-1 bg-gradient-to-r from-[#6857F6] to-[#A549E2]  text-white rounded mt-2 font-inter"
-              >
-                Edit
-              </button>
+              <div className="flex justify-between items-center">
+                <button
+                  onClick={() => handleEdit(product)}
+                  className="px-2 py-1 bg-gradient-to-r from-[#6857F6] to-[#A549E2]  text-white rounded mt-2 font-inter"
+                >
+                  Edit
+                </button>
+                <button onClick={() => handleDelete(product)}>
+                  <MdDeleteForever className="text-red-500" size={20} />
+                </button>
+              </div>
             </div>
           ))}
         </div>
