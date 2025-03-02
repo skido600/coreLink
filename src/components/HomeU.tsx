@@ -1,65 +1,47 @@
+import Image from "next/image";
+import React from "react";
 import Link from "next/link";
-
 function HomeU() {
   return (
     <>
-      <main className="bg-[#181a1f] min-h-screen md:px-20  grid py-[7rem] lg:py-4  lg:grid-cols-2 relative ">
-        <section className="bg-[#03346E] py-2 px-4 mx-4  md:py-4 relative rounded-lg">
-          <h1 className="text-3xl text-white font-inter font-bold">
-            Core
-            <span className="bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
-              Link
-            </span>
-          </h1>
-          <article className=" flex flex-col justify-center  gap-y-8 mt-12">
-            <p className="bg-gradient-to-r text-[2rem]  font-inter from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
+      <main className="flex justify-center items-center min-h-screen bg-gray-50 p-4">
+        <section className="w-full max-w-md p-8 space-y-8">
+          {/* Logo Section */}
+          <div className="flex justify-center">
+            <Image
+              src="/svg/Holding the arrow-bro.svg"
+              width={240}
+              height={240}
+              alt="CoreLink Platform"
+              className="mx-auto"
+            />
+          </div>
+
+          {/* Content Section */}
+          <div className="space-y-4">
+            <h1 className="text-3xl font-bold text-gray-800 text-center">
               Welcome to CoreLink
+            </h1>
+            <p className="text-gray-600 text-center leading-relaxed">
+              CoreLink is a centralized platform for seamless collaboration,
+              real-time updates, and secure task management between admins,
+              workers, and clients.
             </p>
+          </div>
 
-            <div className="mt-2">
-              <p className="text-white font-inter text-[13px]">
-                CoreLink is a centralized platform designed to streamline
-                collaboration between admins, workers, and clients. It provides
-                real-time updates, secure communication, and a shared workspace
-                for managing tasks, products, and projects. Whether you &quot;
-                re managing a small team or a large organization, CoreLink
-                ensures everyone stays connected and informed.
-              </p>
-            </div>
-            <div className="mt-2  flex flex-col  gap-8">
-              <Link href="/signup">
-                <p className=" px-3  rounded-full py-2 text-[13px] bg-[#01162A]  text-white text-center font-inter">
-                  Sign Up
-                </p>
-              </Link>
-              {/* <Link href="/login">
-                <p className=" px-3  bg-[#01162A]  rounded-full py-2 text-[13px]  text-white text-center font-inter">
-                  Login as an Admin
-                </p>
-              </Link> */}
-            </div>
-          </article>
-          {/* <div className="mt-6">
-            <p className="font-Ibm text-white">
-              Already have an account ?
-              <Link href="/login">
-                <span className="bg-gradient-to-r from-[#6857F6] to-[#A549E2] bg-clip-text text-transparent">
-                  Log In
-                </span>{" "}
-              </Link>
-            </p>
-          </div> */}
+          {/* Action Buttons */}
+          <div className="space-y-4">
+            <Link href="/login">
+              <button className="w-full bg-gradient-to-r from-[#92E3A9] to-[#6BCB88] hover:from-[#7ad494] hover:to-[#5ab572] text-white font-semibold py-3 rounded-lg transition-all duration-300">
+                Login
+              </button>
+            </Link>
+            <button className="w-full border-2 border-[#92E3A9] hover:border-[#6BCB88] text-gray-800 font-semibold py-3 rounded-lg transition-all duration-300">
+              <Link href="/signup"> Register</Link>
+            </button>{" "}
+            {/* </Link> */}
+          </div>
         </section>
-
-        <article className="relative  mt-5">
-          <p className="md:absolute bottom-0 px-4 text-[13px] text-white font-inter">
-            &quot;CoreLink is a collaboration and productivity platform that
-            empowers teams to work smarter, not harder. Whether you’re managing
-            a project, sharing updates, or communicating with your team,
-            CoreLink provides the tools you need to stay connected and
-            productive.!&quot;
-          </p>
-        </article>
       </main>
     </>
   );

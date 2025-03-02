@@ -15,6 +15,8 @@ export default {
         inter: ["Jost", "serif"],
         Ibm: ["IBM Plex Sans", "serif"],
         meta: ["Playwrite AU SA Guides", "serif;"],
+        Julius_Sans: ["Julius Sans One", "serif;"],
+        Jaldi: ["Jaldi", "serif"],
       },
       borderRadius: {
         lg: "var(--radius)",

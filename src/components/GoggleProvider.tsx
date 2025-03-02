@@ -28,7 +28,7 @@ function GoggleProvider() {
       });
       setTimeout(() => {
         router.push("/admin");
-      }, 300);
+      }, 50);
     } catch (error) {
       toast({
         description: `Error signing in:  ${error as any}`,
@@ -45,7 +45,7 @@ function GoggleProvider() {
         <GoggleLoader />
       ) : (
         <div className="mt-2 cursor-pointer" onClick={handleGoogleSignIn}>
-          <p className="font-inter flex items-center gap-3 border border-[#CBCBCB] rounded-full justify-center py-3 text-white">
+          <p className="font-inter flex items-center gap-3 border border-[#CBCBCB] text-[#000235] rounded-lg justify-center py-3 ">
             <Image
               src="/svg/Google Icon.svg"
               alt="Description"

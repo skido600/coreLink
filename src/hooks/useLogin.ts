@@ -25,7 +25,6 @@ export function useLogin() {
     password: "",
   });
   const [error, setError] = useState<string | null>(null);
-  // const [termsChecked, setTermsChecked] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -35,10 +34,6 @@ export function useLogin() {
     const { name, value } = e.target;
     setDetails((prev) => ({ ...prev, [name]: value }));
   };
-
-  // const handleCheckboxChange = () => {
-  //   setTermsChecked((prev) => !prev);
-  // };
 
   const validateForm = () => {
     const { email, password } = details;
@@ -70,16 +65,6 @@ export function useLogin() {
       return false;
     }
 
-    // if (!termsChecked) {
-    //   toast({
-    //     description:
-    //       "You must agree to the Terms of Service and Privacy Policy.",
-    //     variant: "destructive",
-    //   });
-    //   setError("You must agree to the Terms of Service and Privacy Policy.");
-    //   return false;
-    // }
-
     setError(null);
     return true;
   };
@@ -97,6 +82,7 @@ export function useLogin() {
       );
       const user = userCredential.user;
       if (!user.emailVerified) {
+        setError("Go to your email and verify befor login.");
         toast({
           description: "Go to your email and verify befor login.",
           variant: "destructive",
@@ -110,9 +96,14 @@ export function useLogin() {
       });
 
       setDetails({ email: "", password: "" });
-      // setTermsChecked(false);
+
       router.push("/admin");
     } catch (error) {
+      toast({
+        description: `${error}`,
+        variant: "destructive",
+      });
+      setError(`${error}`);
       console.log(error);
     } finally {
       setLoading(false);
