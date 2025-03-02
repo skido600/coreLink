@@ -25,7 +25,7 @@ export function useLogin() {
     password: "",
   });
   const [error, setError] = useState<string | null>(null);
-  const [termsChecked, setTermsChecked] = useState(false);
+  // const [termsChecked, setTermsChecked] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -36,9 +36,9 @@ export function useLogin() {
     setDetails((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleCheckboxChange = () => {
-    setTermsChecked((prev) => !prev);
-  };
+  // const handleCheckboxChange = () => {
+  //   setTermsChecked((prev) => !prev);
+  // };
 
   const validateForm = () => {
     const { email, password } = details;
@@ -70,15 +70,15 @@ export function useLogin() {
       return false;
     }
 
-    if (!termsChecked) {
-      toast({
-        description:
-          "You must agree to the Terms of Service and Privacy Policy.",
-        variant: "destructive",
-      });
-      setError("You must agree to the Terms of Service and Privacy Policy.");
-      return false;
-    }
+    // if (!termsChecked) {
+    //   toast({
+    //     description:
+    //       "You must agree to the Terms of Service and Privacy Policy.",
+    //     variant: "destructive",
+    //   });
+    //   setError("You must agree to the Terms of Service and Privacy Policy.");
+    //   return false;
+    // }
 
     setError(null);
     return true;
@@ -110,7 +110,7 @@ export function useLogin() {
       });
 
       setDetails({ email: "", password: "" });
-      setTermsChecked(false);
+      // setTermsChecked(false);
       router.push("/admin");
     } catch (error) {
       console.log(error);
@@ -123,11 +123,11 @@ export function useLogin() {
     details,
     loading,
     error,
-    termsChecked,
+    // termsChecked,
     showPassword,
     handleChange,
     handleSubmit,
-    handleCheckboxChange,
+    // handleCheckboxChange,
     togglePasswordVisibility,
   };
 }

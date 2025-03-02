@@ -3,17 +3,17 @@ import Link from "next/link";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Loader from "@/helper/Loader";
 import { useLogin } from "@/hooks/useLogin";
-
+import GoggleProvider from "./GoggleProvider";
 function Login() {
   const {
     details,
     loading,
     error,
-    termsChecked,
+    // termsChecked,
     showPassword,
     handleChange,
     handleSubmit,
-    handleCheckboxChange,
+    // handleCheckboxChange,
     togglePasswordVisibility,
   } = useLogin();
   return (
@@ -85,7 +85,7 @@ function Login() {
             </div>
           </div>
 
-          <menu className="mt-8 flex gap-2 items-center">
+          {/* <menu className="mt-8 flex gap-2 items-center">
             <input
               type="checkbox"
               checked={termsChecked}
@@ -95,7 +95,8 @@ function Login() {
             <label className="font-Ibm text-white text-[12px]">
               I agree to the Terms of Service and Privacy Policy
             </label>
-          </menu>
+          </menu> */}
+          <GoggleProvider />
         </form>
       </section>
 

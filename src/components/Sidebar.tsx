@@ -1,12 +1,43 @@
+/* eslint-disable */
 "use client";
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { CgMenuRight } from "react-icons/cg";
 import { FiHome, FiBox, FiLink, FiX } from "react-icons/fi";
-
+import { onAuthStateChanged, User } from "firebase/auth";
+import { auth } from "@/firebase/ultil";
+import { IoIosLogOut } from "react-icons/io";
+import { signOut } from "firebase/auth";
+import Image from "next/image";
+import { useToast } from "@/hooks/use-toast";
 function Sidebar() {
+  const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
+  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  //
+  // Listen for auth state changes
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user: User | null) => {
+      setCurrentUser(user);
+    });
+    return unsubscribe;
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      toast({
+        title: "Success!",
+        description: `Logged out successfully!`,
+        variant: "successful",
+      });
+    } catch (error: any) {
+      toast({
+        description: "Logout failed. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
 
   const menuItems = [
     {
@@ -19,20 +50,19 @@ function Sidebar() {
       icon: <FiBox className="icon" />,
       path: "/admin",
     },
-
     {
       name: "Shared Links",
-      icon: <FiLink className="ico" />,
-      path: "/admin/links",
+      icon: <FiLink className="icon" />,
+      path: "/admin/link",
     },
-
-    // {
-    //   name: "Settings", FiSettings,
-    //   icon: <FiSettings className="icon" />,
-    //   path: "/admin/settings",
-    // },
+    {
+      name: "Logout",
+      icon: <IoIosLogOut className="icon" />,
+      action: handleLogout,
+    },
   ];
-  const handleToggle: () => void = () => {
+
+  const handleToggle = () => {
     setIsOpen(!isOpen);
   };
 
@@ -41,12 +71,12 @@ function Sidebar() {
       {/* Mobile Menu Button */}
       <button
         onClick={handleToggle}
-        className="md:hidden fixed top-1 left-2 z-50 p-2 rounded-lg  text-[#]"
+        className="md:hidden fixed top-1 left-2 z-50 p-2 rounded-lg"
       >
         {isOpen ? <FiX size={24} /> : <CgMenuRight size={24} />}
       </button>
 
-      {/* self colse div */}
+      {/* Self-close overlay for mobile */}
       {isOpen && (
         <div
           className="md:hidden fixed inset-0 bg-[#06141799] backdrop-blur-sm z-40"
@@ -74,45 +104,67 @@ function Sidebar() {
         </div>
 
         {/* Menu Items */}
-
         <nav className="h-[50vh] md:h-auto overflow-y-auto">
-          <ul className="space-y-">
+          <ul>
             <div>
-              <h1 className="text-gray-600  font-medium font-inter mb-4">
+              <h1 className="text-gray-600 font-medium font-inter mb-4">
                 Menu
               </h1>
             </div>
             {menuItems.map((item) => (
               <li key={item.name}>
-                <Link
-                  href={item.path}
-                  className="flex items-center md:py-3 md:px-0 py-3 px-2 rounded-lg transition-all
-                    hover:bg-gradient-to-r from-[#6857F610] to-[#A549E210]
-                  
-                    text-gray-600"
-                  onClick={handleToggle}
-                >
-                  <span className="mr-3 text-xl ">{item.icon}</span>
-                  <span className="font-medium font-inter">{item.name}</span>
-                </Link>
+                {item.path ? (
+                  <Link
+                    href={item.path}
+                    className="flex items-center md:py-3 md:px-0 py-3 px-2 rounded-lg transition-all hover:bg-gradient-to-r from-[#6857F610] to-[#A549E210] text-gray-600"
+                    onClick={handleToggle}
+                  >
+                    <span className="mr-3 text-xl">{item.icon}</span>
+                    <span className="font-medium font-inter">{item.name}</span>
+                  </Link>
+                ) : (
+                  <button
+                    onClick={item.action}
+                    className="flex items-center w-full md:py-3 md:px-0 py-3 px-2 rounded-lg transition-all hover:bg-gradient-to-r from-[#6857F610] to-[#A549E210] text-gray-600"
+                  >
+                    <span className="mr-3 text-xl">{item.icon}</span>
+                    <span className="font-medium font-inter">{item.name}</span>
+                  </button>
+                )}
               </li>
             ))}
           </ul>
         </nav>
 
-        {/* user profile will be here*/}
-        {/* <div className="absolute top-0 right-0 w-1 h-16 bg-gradient-to-b from-[#6857F6] to-[#A549E2] rounded-l-full" /> */}
-
         {/* Bottom Profile */}
         <div className="absolute bottom-0 mb-4 left-6 right-6 border-t border-gray-100 pt-4">
           <div className="flex items-center">
-            <div className="h-10 w-10 bg-gradient-to-r from-[#6857F6] to-[#A549E2] rounded-full" />
+            {currentUser?.photoURL ? (
+              <Image
+                src={currentUser.photoURL}
+                alt="Profile Photo"
+                width={40}
+                height={40}
+                className="h-10 w-10 rounded-full"
+              />
+            ) : (
+              <div className="h-10 w-10 rounded-full bg-gray-300 flex items-center justify-center">
+                <span className="text-xl font-medium text-white">
+                  {currentUser?.displayName?.charAt(0) || "U"}
+                </span>
+              </div>
+            )}
             <div className="ml-3">
-              <p className="font-medium">John Doe</p>
-              <p className="text-sm text-gray-500">Administrator</p>
+              <p className="font-medium">
+                {currentUser?.displayName || "User"}
+              </p>
+              <p className="text-sm text-gray-500">
+                {currentUser?.email || "Administrator"}
+              </p>
             </div>
           </div>
         </div>
+        <div></div>
       </div>
     </>
   );

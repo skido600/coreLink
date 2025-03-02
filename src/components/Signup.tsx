@@ -1,10 +1,10 @@
 "use client";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
-
 import Loader from "../helper/Loader";
 import { useSignup } from "@/hooks/useSignup";
+import GoggleProvider from "./GoggleProvider";
 
 function Signup() {
   const {
@@ -18,6 +18,7 @@ function Signup() {
     togglePasswordVisibility,
     handleCheckboxChange,
   } = useSignup();
+
   return (
     <main className="bg-[#181a1f] min-h-screen  md:px-4 py-[7rem] lg:py-4 grid md:grid-cols-2 relative">
       <section className="bg-[#03346E] py-2 px-4  mx-4 md:py-4 relative rounded-lg">
@@ -107,7 +108,7 @@ function Signup() {
           </p>
           <hr className="border-[#CBCBCB] flex-grow" />
         </div>
-        <div className="mt-2">
+        {/* <div className="mt-2">
           <p className="font-inter flex items-center gap-3 border border-[#CBCBCB] rounded-full justify-center py-3 text-white">
             <Image
               src="/svg/Facebook Icon.svg"
@@ -117,8 +118,8 @@ function Signup() {
             />
             Facebook
           </p>
-        </div>
-        <div className="mt-2">
+        </div> */}
+        {/* <div className="mt-2 cursor-pointer" onClick={handleGoogleSignIn}>
           <p className="font-inter flex items-center gap-3 border border-[#CBCBCB] rounded-full justify-center py-3 text-white">
             <Image
               src="/svg/Google Icon.svg"
@@ -128,7 +129,8 @@ function Signup() {
             />
             Google
           </p>
-        </div>
+        </div> */}
+        <GoggleProvider />
       </section>
       <article className="relative mt-12">
         <p className="md:absolute bottom-0 px-4 text-[13px] text-white font-inter">
