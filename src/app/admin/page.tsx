@@ -14,6 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
 import { useUserUid } from "@/context/useUserUid";
 import { TbCurrencyNaira } from "react-icons/tb";
+import { deleteDoc } from "firebase/firestore";
 import Swal from "sweetalert2";
 
 interface ProductData {
@@ -120,10 +121,11 @@ export default function AdminProductsPage() {
       setUpdating(false);
     }
   };
+
   const handleDelete = (product: ProductData) => {
     Swal.fire({
       title: "Delete Product",
-      text: "Are you sure you want to delete this product?",
+      text: "Are you sure you want to permanently delete this product?",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d33",
@@ -133,12 +135,8 @@ export default function AdminProductsPage() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await updateDoc(doc(firestore, "products", product.id), {
-            deleted: true,
-          });
-
+          await deleteDoc(doc(firestore, "products", product.id));
           Swal.fire("Deleted!", "Product deleted successfully.", "success");
-
           setProducts((prev) => prev.filter((p) => p.id !== product.id));
         } catch (error) {
           console.error("Error deleting product:", error);
