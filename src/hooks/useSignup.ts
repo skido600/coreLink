@@ -65,7 +65,7 @@ export function useSignup() {
   const validateForm = () => {
     const { name, email, password } = details;
 
-    if (!name || !email || !password) {
+    if (!name || !email || !password || !termsChecked) {
       toast({
         description: "All fields are required",
         variant: "destructive",

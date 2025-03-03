@@ -9,7 +9,7 @@ function HomeU() {
           {/* Logo Section */}
           <div className="flex justify-center">
             <Image
-              src="/svg/Holding the arrow-bro.svg"
+              src="/svg/bro.svg"
               width={240}
               height={240}
               alt="CoreLink Platform"
@@ -32,14 +32,16 @@ function HomeU() {
           {/* Action Buttons */}
           <div className="space-y-4">
             <Link href="/login">
-              <button className="w-full bg-gradient-to-r from-[#92E3A9] to-[#6BCB88] hover:from-[#7ad494] hover:to-[#5ab572] text-white font-semibold py-3 rounded-lg transition-all duration-300">
+              <button className="w-full bg-[#0B001A]  text-white font-semibold py-3 rounded-lg transition-all duration-300">
                 Login
               </button>
             </Link>
-            <button className="w-full border-2 border-[#92E3A9] hover:border-[#6BCB88] text-gray-800 font-semibold py-3 rounded-lg transition-all duration-300">
-              <Link href="/signup"> Register</Link>
-            </button>{" "}
-            {/* </Link> */}
+
+            <Link href="/signup">
+              <button className="w-full mt-4 border-2 border-[#0B001A]  text-gray-800 font-semibold py-3 rounded-lg transition-all duration-300">
+                Register
+              </button>{" "}
+            </Link>
           </div>
         </section>
       </main>

@@ -9,11 +9,13 @@ export interface ProductType {
   imageUrl: string;
   category?: string;
 }
-
+import { TbCurrencyNaira } from "react-icons/tb";
+import { formatCurrency } from "@/helper/formatCurrency";
 interface ProductProps {
   product: ProductType;
   className?: string;
 }
+
 export default function Product({ product, className }: ProductProps) {
   const discountedPrice =
     product.price - (product.price * product.discount) / 100;
@@ -35,19 +37,15 @@ export default function Product({ product, className }: ProductProps) {
         </h3>
 
         <div className="flex items-baseline gap-2">
-          <span className="text-xl font-bold text-gray-900">
-            ${discountedPrice.toFixed(2)}
-          </span>
-          {product.discount > 0 && (
-            <>
-              <span className="text-sm text-gray-500 line-through">
-                ${product.price.toFixed(2)}
-              </span>
-              <span className="text-sm text-green-600 ml-2">
-                {product.discount}% OFF
-              </span>
-            </>
-          )}
+          <p className="text-xl font-bold flex items-center text-gray-900">
+            <TbCurrencyNaira />
+            {formatCurrency(product.price)}
+          </p>
+
+          <sup className="text-[10px] text-gray-500 line-through">
+            ${product.discount}
+          </sup>
+          {/* <span className="text-sm text-green-600 ml-2"></span> */}
         </div>
 
         {product.category && (

@@ -16,6 +16,7 @@ import { useUserUid } from "@/context/useUserUid";
 import { TbCurrencyNaira } from "react-icons/tb";
 import { deleteDoc } from "firebase/firestore";
 import Swal from "sweetalert2";
+import { formatCurrency } from "@/helper/formatCurrency";
 
 interface ProductData {
   id: string;
@@ -155,9 +156,7 @@ export default function AdminProductsPage() {
       {loading ? (
         <p className="font-meta">Loading products...</p>
       ) : products.length === 0 ? (
-        <p className="font-inter text-red-500">
-          No products found or check your internet
-        </p>
+        <p className="font-inter ">No products found or check your internet</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {products.map((product) => (
@@ -174,9 +173,11 @@ export default function AdminProductsPage() {
               <h2 className="text-xl font-bold font-inter">{product.name}</h2>
               <p className="font-inter flex items-center">
                 Price: <TbCurrencyNaira />
-                {product.price}
+                {formatCurrency(product.price)}
               </p>
-              <p className="font-inter">Discount: {product.discount}%</p>
+              <p className="font-inter flex items-center">
+                Discount: <TbCurrencyNaira /> {formatCurrency(product.discount)}
+              </p>
               <div className="flex justify-between items-center">
                 <button
                   onClick={() => handleEdit(product)}

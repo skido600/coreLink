@@ -30,7 +30,17 @@ const Dashboard: React.FC = () => {
     value: string | File | null
   ) => {
     const updatedProducts = [...products];
-    updatedProducts[index] = { ...updatedProducts[index], [field]: value };
+
+    if (field === "price" && typeof value === "string") {
+      const numericValue = value.replace(/[^0-9,]/g, "");
+      updatedProducts[index] = {
+        ...updatedProducts[index],
+        [field]: numericValue,
+      };
+    } else {
+      updatedProducts[index] = { ...updatedProducts[index], [field]: value };
+    }
+
     setProducts(updatedProducts);
   };
 
@@ -118,7 +128,7 @@ const Dashboard: React.FC = () => {
 
         const productData = {
           name: product.name,
-          price: parseFloat(product.price),
+          price: parseFloat(product.price.replace(/,/g, "")),
           discount: parseFloat(product.discount || "0"),
           category: product.category,
           imageUrl: imageUrl,
@@ -148,6 +158,7 @@ const Dashboard: React.FC = () => {
       setloading(false);
     }
   };
+  // In your handleProductChange function, update the price handling:
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
@@ -258,10 +269,12 @@ const Dashboard: React.FC = () => {
               <input
                 type="number"
                 value={product.price}
-                onChange={(e) =>
-                  handleProductChange(index, "price", e.target.value)
-                }
-                placeholder="Price ($)"
+                onChange={(e) => {
+                  // Allow only numbers and commas
+                  const value = e.target.value.replace(/[^0-9,]/g, "");
+                  handleProductChange(index, "price", value);
+                }}
+                placeholder="Price (₦)"
                 className="w-full p-2 border rounded-md shadow-sm focus:ring focus:ring-blue-500 mb-2"
                 required
               />
