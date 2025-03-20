@@ -1,26 +1,35 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { useAuth } from "../context/AuthContext";
-import { useEffect } from "react";
-import Loader_2 from "@/helper/Loader_2";
+// "use client";
+// import { useRouter } from "next/navigation";
+// import { useAuth } from "../context/AuthContext";
+// // import { useEffect } from "react";
+// // import Loader_2 from "@/helper/Loader_2";
 
-interface ProtectedRouteProps {
-  children: React.ReactNode;
-}
+// interface ProtectedRouteProps {
+//   children: React.ReactNode;
+// }
 
-export default function ProtectedRoute({ children }: ProtectedRouteProps) {
-  const { user, loading } = useAuth();
-  const router = useRouter();
+// export default function ProtectedRoute({ children }: ProtectedRouteProps) {
+//   const { user, loading } = useAuth();
+//   const router = useRouter();
 
-  useEffect(() => {
-    if (!loading && !user) {
-      router.push("/login");
-    }
-  }, [user, loading, router]);
+//   if (loading) {
+//     return <p>loading....</p>;
+//   }
 
-  if (loading) {
-    return <Loader_2 />;
-  }
+//   if (!user) {
+//     return router.push("/");
+//   }
 
-  return user ? <>{children}</> : null; // Render children only if user is authenticated
-}
+//   // useEffect(() => {
+//   //   if (!loading && !user) {
+//   //     router.push("/");
+//   //   }
+//   // }, [user, loading, router]);
+
+//   // if (loading) {
+//   //   // return <Loader_2 />;
+//   //   return <div>jjj/...</div>;
+//   // }
+
+//   return user ? <>{children}</> : null;
+// }

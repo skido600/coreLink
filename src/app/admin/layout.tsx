@@ -1,7 +1,8 @@
 import { Metadata } from "next";
-import ProtectedRoute from "@/components/ProtectedRoute";
+
 import Sidebar from "@/components/Sidebar";
 import Topba from "@/components/Topba";
+import ProtectedRoute from "@/context/ProtectedRoute";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard",
@@ -15,7 +16,7 @@ export default function AdminLayout({
 }) {
   return (
     <ProtectedRoute>
-      <div className="min-h-screen bg-[] flex flex-col md:flex-row">
+      <div className="min-h-screen flex flex-col md:flex-row">
         <div className="fixed md:relative left-0 top-0 h-screen z-50">
           <Sidebar />
         </div>

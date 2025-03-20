@@ -12,11 +12,13 @@ import { MdDeleteForever } from "react-icons/md";
 import { firestore } from "../../firebase/ultil";
 import { useToast } from "@/hooks/use-toast";
 import Image from "next/image";
-import { useUserUid } from "@/context/useUserUid";
+// import { useUserUid } from "@/context/useUserUid";
+
 import { TbCurrencyNaira } from "react-icons/tb";
 import { deleteDoc } from "firebase/firestore";
 import Swal from "sweetalert2";
 import { formatCurrency } from "@/helper/formatCurrency";
+import { useUserUid } from "@/context/useUserUid";
 
 interface ProductData {
   id: string;

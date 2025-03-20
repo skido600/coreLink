@@ -9,6 +9,7 @@ import CustomerLoader from "@/helper/CustomerLoader";
 export default function ProductsPage() {
   const params = useParams();
   const { userId } = params;
+  console.log(userId);
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
