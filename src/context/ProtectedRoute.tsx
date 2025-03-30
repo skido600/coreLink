@@ -17,7 +17,7 @@ const ProtectedRoute = ({ children }: any) => {
 
   if (loading) return <AuthLoader />;
 
-  return user ? children : null; // Ensure content is only rendered when user is available
+  return user ? children : null;
 };
 
 export default ProtectedRoute;
